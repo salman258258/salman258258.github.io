@@ -86,7 +86,6 @@
   .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em; border: 0.5px solid; }
   .tag-flutter { color: var(--teal); border-color: rgba(45,212,191,0.3); background: rgba(45,212,191,0.06); }
   .tag-fe { color: var(--pink); border-color: rgba(244,114,182,0.3); background: rgba(244,114,182,0.06); }
-  .tag-laravel { color: var(--pink); border-color: rgba(244,114,182,0.3); background: rgba(230, 16, 73, 0.06); } /* Reusing pink for Laravel */
   .tag-firebase { color: var(--amber); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.06); }
   .tag-ai { color: var(--green); border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.06); }
   .tag-dart { color: var(--accent2); border-color: rgba(168,154,255,0.3); background: rgba(168,154,255,0.06); }
@@ -110,6 +109,48 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
   .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; } .delay-5 { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0.75rem 1.25rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 12px; }
+
+    .hero { padding: 6rem 1.25rem 3rem; }
+    .hero-inner { flex-direction: column-reverse; align-items: center; gap: 2rem; text-align: center; }
+    .hero-left { min-width: unset; width: 100%; }
+    .hero-right { flex-shrink: unset; }
+
+    .avatar-wrap { width: 160px; height: 160px; }
+
+    .hero-tag { justify-content: center; }
+    .hero-desc { max-width: 100%; }
+    .hero-cta { justify-content: center; }
+    .social-pills { justify-content: center; }
+
+    .stats-bar { max-width: 100%; margin-top: 2.5rem; }
+    .stat-num { font-size: 1.4rem; }
+    .stat-item { padding: 1rem; }
+
+    .projects-section, .skills-section, .contact-section { padding: 4rem 1.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+
+    .contact-card { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    .contact-text h3 { font-size: 1.4rem; }
+    .contact-links { width: 100%; }
+    .contact-links .btn-primary,
+    .contact-links .btn-ghost { flex: 1; justify-content: center; }
+
+    .section-title { font-size: 1.8rem; }
+  }
+
+  @media (max-width: 400px) {
+    .nav-links { gap: 0.8rem; }
+    .hero-name { font-size: 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta a { text-align: center; justify-content: center; }
+  }
   ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 2px; }
 </style>
 </head>
@@ -203,7 +244,7 @@
       <div class="project-icon" style="background:rgba(45,212,191,0.1);">💊</div>
       <h3 class="project-title">Farmaku Clone</h3>
       <p class="project-desc">Online pharmacy app clone featuring medicine catalog, search functionality, and cart management with a clean healthcare-oriented design.</p>
-      <div class="project-tags"><span class="tag tag-flutter">Flutter</span><span class="tag tag-laravel">Laravel</span><span class="tag tag-dart">Dart</span></div>
+      <div class="project-tags"><span class="tag tag-flutter">Flutter</span><span class="tag tag-fe">Front End</span><span class="tag tag-dart">Dart</span></div>
     </div>
     <div class="project-card">
       <div class="project-num">04 / 05</div>
