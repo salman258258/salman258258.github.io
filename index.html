@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salman Alfa Rizzi — Flutter Developer</title>
+  <meta name="description" content="Flutter developer. Bikin mobile apps dari fintech sampai civic tools." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0A0E1A;--surface:#111827;--surface2:#1A2035;
+      --tx:#F0F2F8;--tx2:rgba(240,242,248,.6);--txm:rgba(240,242,248,.35);
+      --ac:#5B8BFF;--gr:#34D399;--or:#FB923C;--pu:#A78BFA;
+      --bd:rgba(255,255,255,.08);--bdl:rgba(255,255,255,.14);
+      --fm:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;
+      --r:8px;--rl:14px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--fm);background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:.5px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem}
+    .logo{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--ac);text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--ac)}
+
+    /* HERO */
+    .hero{padding:5rem 2rem 4rem;max-width:780px;margin:0 auto}
+    .eyebrow{font-family:var(--mono);font-size:12px;color:var(--ac);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:10px}
+    .eyebrow::before{content:'';display:inline-block;width:28px;height:1.5px;background:var(--ac);border-radius:2px}
+    .hero h1{font-size:clamp(40px,8vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.025em;margin-bottom:1.4rem}
+    .hero h1 .ac{color:var(--ac)}
+    .hero-desc{font-size:17px;color:var(--tx2);max-width:500px;line-height:1.75;margin-bottom:2.2rem}
+    .cta-group{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:3rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--r);font-size:14px;font-weight:500;font-family:var(--fm);cursor:pointer;text-decoration:none;transition:opacity .2s,transform .15s;border:none}
+    .btn:active{transform:scale(.97)}
+    .btn-p{background:var(--ac);color:#fff}.btn-p:hover{opacity:.88}
+    .btn-g{background:transparent;color:var(--tx2);border:.5px solid var(--bdl)}.btn-g:hover{border-color:var(--ac);color:var(--tx)}
+    .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--gr);background:rgba(52,211,153,.08);border:.5px solid rgba(52,211,153,.2);padding:6px 14px;border-radius:100px}
+    .dot{width:6px;height:6px;background:var(--gr);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* SECTIONS */
+    section{border-top:.5px solid var(--bd);padding:4rem 2rem;max-width:780px;margin:0 auto}
+    .s-eye{font-family:var(--mono);font-size:11px;color:var(--txm);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+    .s-title{font-size:28px;font-weight:700;letter-spacing:-.015em;margin-bottom:2.5rem}
+
+    /* PROJECT GRID */
+    .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:560px){.pgrid{grid-template-columns:1fr}}
+
+    .pcard{background:var(--surface);border:.5px solid var(--bdl);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+    .pcard:hover{border-color:rgba(91,139,255,.45);transform:translateY(-3px)}
+    .pcard:hover .cov{opacity:1}
+
+    .pframe{background:var(--surface2);padding:1.5rem 1rem 1.2rem;display:flex;justify-content:center;align-items:flex-end;min-height:200px;position:relative;overflow:hidden}
+    .arc{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--txm);background:rgba(255,255,255,.05);border:.5px solid var(--bd);padding:3px 8px;border-radius:4px;z-index:1}
+
+    .cov{position:absolute;inset:0;background:rgba(10,14,26,.75);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .22s;backdrop-filter:blur(2px)}
+    .cov span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#fff;background:var(--ac);padding:7px 16px;border-radius:6px;display:flex;align-items:center;gap:6px}
+
+    .ss-main{width:100px;height:175px;object-fit:cover;border-radius:10px;border:2px solid rgba(255,255,255,.15);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+
+    .ph-wrap{width:100px;height:175px;border-radius:10px;border:2px solid rgba(255,255,255,.15);background:var(--bg);overflow:hidden}
+    .ph-inner{width:100%;height:100%;padding:8px 6px;display:flex;flex-direction:column;gap:4px}
+    .ph-notch{width:28px;height:4px;background:rgba(255,255,255,.12);border-radius:2px;margin:2px auto 4px}
+    .ph-b{height:5px;border-radius:2px;background:rgba(91,139,255,.35)}
+    .ph-b.w8{width:80%}.ph-b.w6{width:60%}.ph-b.w4{width:40%}
+    .ph-b.sm{height:3px;background:rgba(255,255,255,.1)}
+    .ph-b.bl{height:22px;border-radius:5px;background:rgba(91,139,255,.6)}
+    .ph-b.bl.g{background:rgba(52,211,153,.6)}.ph-b.bl.o{background:rgba(251,146,60,.6)}.ph-b.bl.p{background:rgba(167,139,250,.6)}
+
+    .pinfo{padding:1rem 1.25rem 1.25rem}
+    .ptags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+    .tag{font-family:var(--mono);font-size:10px;letter-spacing:.03em;padding:2px 8px;border-radius:4px}
+    .tb{background:rgba(91,139,255,.12);color:var(--ac)}
+    .tg{background:rgba(52,211,153,.12);color:var(--gr)}
+    .to{background:rgba(251,146,60,.12);color:var(--or)}
+    .tp{background:rgba(167,139,250,.12);color:var(--pu)}
+    .pname{font-size:15px;font-weight:700;margin-bottom:3px}
+    .pdesc{font-size:12px;color:var(--tx2);line-height:1.5}
+
+    /* MODAL */
+    .mbg{position:fixed;inset:0;z-index:1000;background:rgba(5,8,18,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .25s}
+    .mbg.open{opacity:1;pointer-events:all}
+    .mbox{background:var(--surface);border:.5px solid var(--bdl);border-radius:18px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .25s;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+    .mbg.open .mbox{transform:translateY(0) scale(1)}
+    .mhead{position:sticky;top:0;background:var(--surface);border-bottom:.5px solid var(--bd);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;z-index:10}
+    .mtitle{font-size:17px;font-weight:700}
+    .mclose{background:rgba(255,255,255,.07);border:.5px solid var(--bd);color:var(--tx2);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background .15s,color .15s}
+    .mclose:hover{background:rgba(255,255,255,.13);color:var(--tx)}
+    .mbody{padding:1.5rem}
+    .mss{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:1.5rem;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+    .mss img{height:280px;width:auto;border-radius:12px;border:1.5px solid rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.4);flex-shrink:0;object-fit:cover}
+    .mph-row{display:flex;gap:12px;margin-bottom:1.5rem}
+    .mph{height:280px;width:140px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:var(--surface2);flex-shrink:0;overflow:hidden;display:flex;flex-direction:column;padding:12px 10px;gap:6px}
+    .meye{font-family:var(--mono);font-size:10px;color:var(--txm);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+    .mptitle{font-size:22px;font-weight:700;margin-bottom:.5rem}
+    .mdesc{font-size:14px;color:var(--tx2);line-height:1.7;margin-bottom:1.5rem}
+    .mmeta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem}
+    .mmi{background:var(--surface2);border:.5px solid var(--bd);border-radius:var(--r);padding:.8rem 1rem}
+    .mml{font-family:var(--mono);font-size:10px;color:var(--txm);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .mmv{font-size:13px;font-weight:500}
+    .mtags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+    .mlinks{display:flex;gap:10px;flex-wrap:wrap}
+    .ml{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--r);font-size:13px;font-weight:500;text-decoration:none;transition:opacity .2s}
+    .ml-p{background:var(--ac);color:#fff}.ml-p:hover{opacity:.85}
+    .ml-g{background:transparent;color:var(--tx2);border:.5px solid var(--bdl)}.ml-g:hover{border-color:var(--ac);color:var(--tx)}
+
+    /* SKILLS */
+    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:480px){.sgrid{grid-template-columns:1fr 1fr}}
+    .scard{background:var(--surface);border:.5px solid var(--bd);border-radius:var(--r);padding:1.1rem}
+    .sicon{margin-bottom:10px;color:var(--ac)}.sicon.g{color:var(--gr)}.sicon.o{color:var(--or)}
+    .sname{font-size:13px;font-weight:700;margin-bottom:5px}
+    .ssub{font-family:var(--mono);font-size:11px;color:var(--txm);line-height:1.7}
+
+    /* CONTACT */
+    .clinks{display:flex;gap:12px;flex-wrap:wrap}
+    .cl{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;background:var(--surface);border:.5px solid var(--bdl);border-radius:var(--r);color:var(--tx2);text-decoration:none;font-size:13px;transition:border-color .2s,color .2s}
+    .cl:hover{border-color:var(--ac);color:var(--tx)}
+    .cl svg{width:18px;height:18px;flex-shrink:0}
+
+    /* FOOTER */
+    footer{border-top:.5px solid var(--bd);padding:1.5rem 2rem;max-width:780px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .fc{font-family:var(--mono);font-size:11px;color:var(--txm)}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">SAR.dev</a>
+  <ul class="nav-links">
+    <li><a href="#projects">work</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Flutter Developer</div>
+  <h1>Salman<br>Alfa <span class="ac">Rizzi</span></h1>
+  <p class="hero-desc">Gue bikin mobile apps — dari fintech sampai civic tools. Nggak cuma coding, tapi mikirin gimana orang beneran pakai appnya.</p>
+  <div class="cta-group">
+    <a href="https://github.com/salman258258" target="_blank" rel="noopener" class="btn btn-p">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/salman-alfa-rizzi-473247252/" target="_blank" rel="noopener" class="btn btn-g">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+  <div class="status"><div class="dot"></div>open to work</div>
+</header>
+
+<section id="projects">
+  <div class="s-eye">selected work</div>
+  <div class="s-title">Projects</div>
+  <div class="pgrid">
+
+    <!--
+    ╔══════════════════════════════════════════════════════╗
+    ║  CARA EDIT PROJECT CARD:                             ║
+    ║  Semua info ada di data-* attribute.                 ║
+    ║  Ganti value-nya sesuai project lo.                  ║
+    ║                                                      ║
+    ║  data-name        → nama project                     ║
+    ║  data-desc        → deskripsi panjang di modal       ║
+    ║  data-role        → peran lo (misal: Solo Developer) ║
+    ║  data-year        → tahun project                    ║
+    ║  data-stack       → tech stack, pisah pakai koma     ║
+    ║  data-status      → archived / active / in progress  ║
+    ║  data-github      → link repo                        ║
+    ║  data-screenshots → path gambar pisah koma           ║
+    ║                                                      ║
+    ║  Untuk gambar utama card:                            ║
+    ║  Ganti src di <img class="ss-main">                  ║
+    ║  Kalau belum ada gambar, hapus <img> dan             ║
+    ║  uncomment <div class="ph-wrap">                     ║
+    ╚══════════════════════════════════════════════════════╝
+    -->
+
+    <!-- PROJECT 1 — Facetam -->
+    <div class="pcard"
+      data-name="Facetam"
+      data-desc="Aplikasi absensi berbasis face recognition menggunakan Flutter dan Firebase. Dibangun untuk mempermudah pencatatan kehadiran secara akurat dan real-time tanpa perlu input manual."
+      data-role="Solo Developer"
+      data-year="2026"
+      data-stack="Flutter, Firebase, Dart, ML Kit"
+      data-status="active"
+      data-github="https://github.com/salman258258/face_Tam---Teacher-Attendance-"
+      data-screenshots="assets/images/facetam_onboarding.png,assets/images/facetam_homepage.png,assets/images/facetam_profile.png,assets/images/facetam_rekap.png"
+      onclick="openModal(this)">
+      <div class="pframe">
+        <span class="arc">active</span>
+        <img src="assets/images/facetam_onboarding.png" alt="Facetam" class="ss-main"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <div class="ph-wrap" style="display:none">
+          <div class="ph-inner"><div class="ph-notch"></div><div class="ph-b sm"></div><div class="ph-b bl" style="width:100%"></div><div class="ph-b w8"></div><div class="ph-b w6"></div><div class="ph-b sm"></div><div class="ph-b w4"></div></div>
+        </div>
+        <div class="cov"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Lihat Detail</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="ptags"><span class="tag tb">Flutter</span><span class="tag tb">Firebase</span><span class="tag tb">ML Kit</span></div>
+        <div class="pname">Facetam</div>
+        <div class="pdesc">Absensi face recognition real-time dengan Flutter &amp; Firebase.</div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 — isi sesuai project lo -->
+    <div class="pcard"
+      data-name="Sicakap - Layanan Desa"
+      data-desc="Aplikasi mobile untuk layanan desa dengan fitur pengajuan, riwayat, dan informasi."
+      data-role="Full Stack · DB setup collaborated w/ teammate"
+      data-year="2025"
+      data-stack="Flutter, REST API, Dart , Supabase"
+      data-status="active"
+      data-github="https://github.com/salman258258/SiANTARA/tree/siantara-salman"
+      data-screenshots="assets/images/sicakap_homepage.png,assets/images/sicakap_profile.png,assets/images/sicakap_login.png,assets/images/sicakap_pengajuan.png,assets/images/sicakap_riwayat.png"
+      onclick="openModal(this)">
+      <div class="pframe">
+        <span class="arc">active</span>
+        <img src="assets/images/sicakap_homepage.png" alt="Sicakap" class="ss-main"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <!-- <div class="ph-wrap">
+          <div class="ph-inner"><div class="ph-notch"></div><div class="ph-b sm"></div><div class="ph-b bl g" style="width:60%"></div><div class="ph-b w8"></div><div class="ph-b sm"></div><div class="ph-b w6"></div><div class="ph-b bl g" style="width:45%;height:14px"></div></div>
+        </div> -->
+        <div class="cov"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Lihat Detail</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="ptags"><span class="tag tg">Flutter</span><span class="tag tg">REST API</span><span class="tag tg">Dart</span><span class="tag tg">Supabase</span></div>
+        <div class="pname">Sicakap - Layanan Desa</div>
+        <div class="pdesc">Aplikasi mobile untuk layanan desa dengan fitur pengajuan, riwayat, dan informasi.</div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="pcard"
+      data-name="Farmaku - Aplikasi Apotek"
+      data-desc="Aplikasi mobile untuk manajemen apotek dengan fitur pencarian obat, pemesanan, dan riwayat transaksi."
+      data-role="Team · UI & API Integration"
+      data-year="2024"
+      data-stack="Flutter, Dart , Laravel , Firebase"
+      data-status="archived"
+      data-github="https://github.com/malbae/Farmaku"
+      data-screenshots="assets/images/farmaku_homepage.png,assets/images/farmaku_profile.png,assets/images/farmaku_login.png,assets/images/farmaku_homepage.png,assets/images/farmaku_detailpage.png,assets/images/farmaku_apotek.png,assets/images/farmaku_search.png"
+      onclick="openModal(this)">
+      <div class="pframe">
+        <span class="arc">archived</span>
+        <img src="assets/images/farmaku_homepage.png" alt="Farmaku" class="ss-main"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <!-- <div class="ph-wrap">
+          <div class="ph-inner"><div class="ph-notch"></div><div class="ph-b bl o" style="width:100%;height:18px"></div><div class="ph-b sm"></div><div class="ph-b w6"></div><div class="ph-b w8"></div><div class="ph-b sm"></div><div class="ph-b w4"></div></div>
+        </div> -->
+        <div class="cov"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Lihat Detail</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="ptags"><span class="tag to">Flutter</span><span class="tag to">Dart</span><span class="tag to">Laravel</span><span class="tag to">Firebase</span></div>
+        <div class="pname">Farmaku - Aplikasi Apotek</div>
+        <div class="pdesc">Aplikasi mobile untuk manajemen apotek dengan fitur pencarian obat, pemesanan, dan riwayat transaksi.</div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="pcard"
+      data-name="Brimo - Aplikasi Keuangan"
+      data-desc="Aplikasi mobile untuk manajemen keuangan pribadi dengan fitur pencatatan transaksi, laporan keuangan, dan budgeting."
+      data-role="Full Stack · UI Figma collaborated w/ teammate"
+      data-year="2024"
+      data-stack="Flutter, Dart , Figma"
+      data-status="archived"
+      data-github="https://github.com/salman258258/TUBES_PPB_KELOMPOK7_REDESIGN_BRIMO"
+      data-screenshots="assets/images/brimo_aktivitas.png,assets/images/brimo_homepage.png,assets/images/brimo_profile.png,assets/images/brimo_aktivitas.png,assets/images/brimo_login.png,assets/images/brimo_mutasi.png"
+      onclick="openModal(this)">
+      <div class="pframe">
+        <span class="arc">archived</span>
+        <img src="assets/images/brimo_login.png" alt="Brimo" class="ss-main"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <!-- <div class="ph-wrap">
+          <div class="ph-inner"><div class="ph-notch"></div><div class="ph-b sm"></div><div class="ph-b w8"></div><div class="ph-b bl p" style="width:55%;height:28px;border-radius:7px"></div><div class="ph-b sm"></div><div class="ph-b w6"></div></div>
+        </div> -->
+        <div class="cov"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Lihat Detail</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="ptags"><span class="tag tp">Flutter</span><span class="tag tp">Dart</span><span class="tag tp">Figma</span></div>
+        <div class="pname">Brimo - Aplikasi Keuangan</div>
+        <div class="pdesc">Aplikasi mobile untuk manajemen keuangan pribadi dengan fitur pencatatan transaksi, laporan keuangan, dan budgeting.</div>
+      </div>
+    </div>
+    <!-- PROJECT 5
+    <div class="pcard"
+      data-name="Duit kemana?  - Tracking Keuangan"
+      data-desc="Aplikasi mobile untuk melacak pengeluaran dan pemasukan keuangan pribadi dengan fitur pencatatan transaksi, laporan keuangan, dan budgeting."
+      data-role="Solo Developer"
+      data-year="2026"
+      data-stack="Flutter, Dart , Supabase, Claude AI"
+      data-status="active"
+      data-github="https://github.com/salman258258/Duit-Kemana-"
+      data-screenshots="assets/images/brimo_aktivitas.png,assets/images/brimo_homepage.png,assets/images/brimo_profile.png,assets/images/brimo_aktivitas.png,assets/images/brimo_login.png,assets/images/brimo_mutasi.png"
+      onclick="openModal(this)">
+      <div class="pframe">
+        <span class="arc">active</span>
+        <img src="assets/images/brimo_login.png" alt="Brimo" class="ss-main"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <div class="ph-wrap">
+          <div class="ph-inner"><div class="ph-notch"></div><div class="ph-b sm"></div><div class="ph-b w8"></div><div class="ph-b bl p" style="width:55%;height:28px;border-radius:7px"></div><div class="ph-b sm"></div><div class="ph-b w6"></div></div>
+        </div> -->
+        <!-- <div class="cov"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Lihat Detail</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="ptags"><span class="tag tp">Flutter</span><span class="tag tp">Dart</span><span class="tag tp">Supabase</span><span class="tag tp">Claude AI</span></div>
+        <div class="pname">Duit kemana?  - Tracking Keuangan</div>
+        <div class="pdesc">Aplikasi mobile untuk melacak pengeluaran dan pemasukan keuangan pribadi dengan fitur pencatatan transaksi, laporan keuangan, dan budgeting.</div>
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-eye">toolkit</div>
+  <div class="s-title">Skills</div>
+  <div class="sgrid">
+    <div class="scard"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="18" x2="15" y2="18"/></svg></div><div class="sname">Mobile Dev</div><div class="ssub">Flutter · Dart<br>iOS &amp; Android</div></div>
+    <div class="scard"><div class="sicon g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="sname">Backend / DB</div><div class="ssub">Firebase · Supabase · SQLite<br>REST API</div></div>
+    <div class="scard"><div class="sicon o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 012 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg></div><div class="sname">Version Control</div><div class="ssub">Git · GitHub<br>CI/CD basic</div></div>
+    <div class="scard"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="sname">UI Implementation</div><div class="ssub">Material Design<br>Custom widgets</div></div>
+    <div class="scard"><div class="sicon g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="sname">State Management</div><div class="ssub">GetX · Riverpod</div></div>
+    <div class="scard"><div class="sicon o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="sname">Tools</div><div class="ssub">VS Code · Android Studio<br>Postman · Figma</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-eye">get in touch</div>
+  <div class="s-title">Contact</div>
+  <div class="clinks">
+    <a href="https://github.com/salman258258" target="_blank" rel="noopener" class="cl">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      github.com/salman258258
+    </a>
+    <a href="https://linkedin.com/in/salman-alfarizzi-473247252" target="_blank" rel="noopener" class="cl">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <!-- Email: hapus komentar ini dan isi email lo
+    <a href="mailto:email@lo.com" class="cl">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      email@lo.com
+    </a>
+    -->
+  </div>
+</section>
+
+<footer>
+  <span class="fc">© 2025 Salman Alfa Rizzi</span>
+  <div class="status"><div class="dot"></div>open to work</div>
+</footer>
+
+<!-- MODAL — auto generate dari data-* card, jangan diedit manual -->
+<div class="mbg" id="modal" onclick="bgClick(event)">
+  <div class="mbox" id="mbox">
+    <div class="mhead">
+      <span class="mtitle" id="mTitle"></span>
+      <button class="mclose" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mbody">
+      <div id="mSS"></div>
+      <div class="meye">Project</div>
+      <div class="mptitle" id="mPTitle"></div>
+      <div class="mdesc" id="mDesc"></div>
+      <div class="mmeta">
+        <div class="mmi"><div class="mml">Role</div><div class="mmv" id="mRole"></div></div>
+        <div class="mmi"><div class="mml">Year</div><div class="mmv" id="mYear"></div></div>
+        <div class="mmi" style="grid-column:span 2"><div class="mml">Tech Stack</div><div class="mmv" id="mStack"></div></div>
+      </div>
+      <div class="mtags" id="mTags"></div>
+      <div class="mlinks" id="mLinks"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const COLORS = ['tb','tg','to','tp'];
+
+  function openModal(card) {
+    const d = card.dataset;
+    document.getElementById('mTitle').textContent  = d.name || '';
+    document.getElementById('mPTitle').textContent = d.name || '';
+    document.getElementById('mDesc').textContent   = d.desc || '';
+    document.getElementById('mRole').textContent   = d.role || '—';
+    document.getElementById('mYear').textContent   = d.year || '—';
+    document.getElementById('mStack').textContent  = d.stack || '—';
+
+    // Screenshots
+    const ss = d.screenshots ? d.screenshots.split(',').map(s=>s.trim()).filter(Boolean) : [];
+    const ssEl = document.getElementById('mSS');
+    if (ss.length) {
+      ssEl.innerHTML = '<div class="mss">' + ss.map(s=>`<img src="${s}" alt="${d.name}" loading="lazy" />`).join('') + '</div>';
+    } else {
+      ssEl.innerHTML = '<div class="mph-row">' + [1,2,3].map(()=>`
+        <div class="mph">
+          <div class="ph-notch"></div>
+          <div class="ph-b bl" style="width:100%;height:28px"></div>
+          <div class="ph-b sm"></div><div class="ph-b w8"></div><div class="ph-b w6"></div>
+          <div class="ph-b sm"></div><div class="ph-b w4"></div><div class="ph-b w8"></div>
+          <div class="ph-b sm"></div><div class="ph-b bl" style="width:70%;height:16px"></div>
+        </div>`).join('') + '</div>';
+    }
+
+    // Tags
+    document.getElementById('mTags').innerHTML = (d.stack||'').split(',').map((t,i)=>
+      `<span class="tag ${COLORS[i%COLORS.length]}">${t.trim()}</span>`).join('');
+
+    // Links
+    let lh = '';
+    if (d.github) lh += `<a href="${d.github}" target="_blank" rel="noopener" class="ml ml-p">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      Source Code</a>`;
+    const statusMap = {archived:'📦 Archived', active:'✅ Active', 'in progress':'🚧 In Progress'};
+    if (d.status && statusMap[d.status]) lh += `<span class="ml ml-g" style="cursor:default">${statusMap[d.status]}</span>`;
+    document.getElementById('mLinks').innerHTML = lh;
+
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function bgClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
